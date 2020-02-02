@@ -8,10 +8,10 @@ jobs:
     container: rocker/verse
     steps:
       - uses: actions/checkout@v1
-      - run: Rscript -e "rmarkdown::render("test.Rmd")
+      - run: Rscript -e 'rmarkdown::render("index.Rmd")'
       - name: Upload results
         uses: actions/upload-artifact@master
         with:
           name: results
-          path: test.html
+          path: index.html
           

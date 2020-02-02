@@ -4,7 +4,7 @@ name: render
 
 jobs:
   render:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     container: rocker/verse
     steps:
       - uses: actions/checkout@v1

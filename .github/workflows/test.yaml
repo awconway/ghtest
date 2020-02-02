@@ -8,7 +8,7 @@ jobs:
     container: rocker/verse
     steps:
       - uses: actions/checkout@v1
-      - run: Rscript -e 'rmarkdown::render("docs/index.Rmd")'
+      - run: Rscript -e 'rmarkdown::render("index.Rmd")'
       
       - name: Install npm
         uses: actions/setup-node@v1      
@@ -20,4 +20,4 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: |
           npm install netlify-cli -g
-          netlify deploy --prod docs
+          netlify deploy -p

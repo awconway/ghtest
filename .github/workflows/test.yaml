@@ -1,0 +1,18 @@
+on: push
+
+name: render
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    container: rocker/verse
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install dependencies
+      - run: Rscript -e "rmarkdown::render("test.Rmd")
+      - name: Upload results
+        uses: actions/upload-artifact@master
+        with:
+          name: results
+          path: test.html
+          

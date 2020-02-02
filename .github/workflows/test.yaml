@@ -8,7 +8,6 @@ jobs:
     container: rocker/verse
     steps:
       - uses: actions/checkout@v1
-      - name: Install dependencies
       - run: Rscript -e "rmarkdown::render("test.Rmd")
       - name: Upload results
         uses: actions/upload-artifact@master

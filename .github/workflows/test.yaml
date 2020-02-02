@@ -9,9 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - run: Rscript -e 'rmarkdown::render("index.Rmd")'
-      - name: Upload results
-        uses: actions/upload-artifact@master
-        with:
-          name: results
-          path: index.html
+      - name: Commit results
+        run: |
+          git commit index.html -m 'Re-build index.Rmd' || echo "No changes to commit"
+          git push https://${{github.actor}}:${{secrets.actions}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
           

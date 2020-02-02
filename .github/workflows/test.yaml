@@ -5,10 +5,27 @@ name: render-index
 jobs:
   render:
     runs-on: ubuntu-latest
-    container: rocker/verse
     steps:
-      - uses: actions/checkout@v1
-      - run: Rscript -e 'rmarkdown::render("index.Rmd")'
+      - name: Checkout repo
+        uses: actions/checkout@master
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@master
+
+      - name: Install pandoc and pandoc citeproc
+        run: |
+          brew install pandoc
+          brew install pandoc-citeproc
+          
+      - name: Cache bookdown results
+        uses: actions/cache@v1
+        with:
+          path: _bookdown_files
+          key: bookdown-${{ hashFiles('**/*Rmd') }}
+          restore-keys: bookdown-
+          
+      - name: Build site
+        run: Rscript -e 'bookdown::render_book("index.Rmd", quiet = TRUE)'
       
       - name: Install npm
         uses: actions/setup-node@v1      
@@ -20,4 +37,4 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: |
           npm install netlify-cli -g
-          netlify deploy -p
+          netlify deploy --prod --dir _book

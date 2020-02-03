@@ -42,4 +42,4 @@ jobs:
         with:
           ACCESS_TOKEN: ${{ secrets.actions }} # https://github.com/settings/tokens
           BRANCH: master # The branch the action should deploy to.
-          FOLDER: _site # The folder the action should deploy.
+          FOLDER: . # The folder the action should deploy.

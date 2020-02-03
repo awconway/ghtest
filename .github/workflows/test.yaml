@@ -33,8 +33,6 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v1
         with:
-         # Artifact name
-          name: docs # optional
          # Destination path
           path: .
       - name: Deploy to GitHub Pages

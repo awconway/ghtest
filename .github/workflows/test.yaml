@@ -31,8 +31,12 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: results
+      
+      - run: cd results
           
       - run: mv index.html ../
+      
+      - run: cd ..
           
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@releases/v3

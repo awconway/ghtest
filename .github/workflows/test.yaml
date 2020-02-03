@@ -15,11 +15,11 @@ jobs:
     - name: render rmarkdown  
       run: Rscript -e 'rmarkdown::render("docs/index.Rmd")'
       
-      - name: Upload results
-        uses: actions/upload-artifact@master
-        with:
-          name: results
-          path: docs/
+    - name: Upload results
+      uses: actions/upload-artifact@master
+      with:
+        name: results
+        path: docs/
           
   checkout-and-deploy:
     runs-on: ubuntu-latest

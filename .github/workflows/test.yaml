@@ -15,6 +15,11 @@ jobs:
         with:
           name: results
           path: index.html
+
+      - name: download build artifacts
+        uses: actions/download-artifact@master
+        with: 
+          name: index.html
       
       - name: Install npm
         uses: actions/setup-node@v1      

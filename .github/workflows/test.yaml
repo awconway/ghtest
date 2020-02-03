@@ -30,14 +30,10 @@ jobs:
          # Destination path
           path: index.html # optional
      
-      - name: Install npm
-        uses: actions/setup-node@v1      
-      
-      - name: Deploy to Netlify
-        # NETLIFY_AUTH_TOKEN added in the repo's secrets
+      - name: Deploy to GitHub Pages
+        uses: Cecilapp/GitHub-Pages-deploy@master
         env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        run: |
-          npm install netlify-cli -g
-          netlify deploy -p
+          EMAIL: ${{ secrets.EMAIL }}               # must be a verified email
+          GH_TOKEN: ${{ secrets.actions }} # https://github.com/settings/tokens
+          BUILD_DIR: _site/                     # "_site/" by default
+    

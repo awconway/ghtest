@@ -8,13 +8,13 @@ jobs:
     container: rocker/verse
     steps:
       - uses: actions/checkout@v1
-      - run: Rscript -e 'rmarkdown::render("index.Rmd")'
+      - run: Rscript -e 'rmarkdown::render("docs/index.Rmd")'
       
       - name: Upload results
         uses: actions/upload-artifact@master
         with:
           name: results
-          path: index.html
+          path: docs/index.html
           
   checkout-and-deploy:
     runs-on: ubuntu-latest
@@ -28,11 +28,11 @@ jobs:
          # Artifact name
           name: results # optional
          # Destination path
-          path: index.html # optional
+          path: docs/index.html # optional
      
       - name: Deploy to GitHub Pages
         uses: Cecilapp/GitHub-Pages-deploy@master
         env:
           EMAIL: ${{ secrets.EMAIL }}               # must be a verified email
           GH_TOKEN: ${{ secrets.actions }} # https://github.com/settings/tokens
-          BUILD_DIR: _site/                     # "_site/" by default
+          BUILD_DIR: _docs/                     # "_site/" by default

@@ -32,6 +32,8 @@ jobs:
         with:
           name: results
           
+      - run: mv index.html ../
+          
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:

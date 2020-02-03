@@ -7,7 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     container: rocker/verse
     steps:
-      - uses: actions/checkout@v1
+    - name: Checkout
+      uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+      with:
+        persist-credentials: false
       - run: Rscript -e 'rmarkdown::render("docs/index.Rmd")'
       
       - name: Upload results
@@ -35,8 +38,8 @@ jobs:
           apt-get update && apt-get install -y rsync
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@releases/v3-beta
-        env:
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
           ACCESS_TOKEN: ${{ secrets.actions }} # https://github.com/settings/tokens
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: docs # The folder the action should deploy.

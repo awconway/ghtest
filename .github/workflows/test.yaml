@@ -34,6 +34,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@releases/v3
         env:
           GH_TOKEN: ${{ secrets.actions }} # https://github.com/settings/tokens
-          BUILD_DIR: _docs/                     # "_site/" by default
+          BUILD_DIR: docs/                     # "_site/" by default
           CNAME: aaronconway.info                      # in case of custom domain
           

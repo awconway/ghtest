@@ -36,7 +36,7 @@ jobs:
          # Artifact name
           name: docs # optional
          # Destination path
-
+          path: .
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:

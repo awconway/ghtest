@@ -35,10 +35,6 @@ jobs:
          # Destination path
           path: docs/ # optional
 
-      - name: Install rsync
-        run: |
-          apt-get update && apt-get install -y rsync
-
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:

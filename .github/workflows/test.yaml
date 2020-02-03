@@ -29,8 +29,8 @@ jobs:
           name: results # optional
          # Destination path
           path: index.html # optional
-         
-     -  name: Install npm
+     
+      - name: Install npm
         uses: actions/setup-node@v1      
       
       - name: Deploy to Netlify

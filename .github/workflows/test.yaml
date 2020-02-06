@@ -43,11 +43,11 @@ jobs:
         #  git push ${REMOTE} master
 
 
-  build:
-    runs-on: ubuntu-latest
-    needs: render
-    steps:
-    - name: Trigger our build webhook on Netlify
-      run: curl -s -X POST "https://api.netlify.com/build_hooks/${token}"
-      env:
-        TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+    build:
+      runs-on: ubuntu-latest
+      needs: render
+      steps:
+      - name: Trigger our build webhook on Netlify
+        run: curl -s -X POST "https://api.netlify.com/build_hooks/${token}"
+        env:
+          TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

@@ -22,6 +22,7 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: docs
+        path: index.html
               
         
   checkout-and-deploy:

@@ -16,18 +16,18 @@ jobs:
     - name: render rmarkdown  
       run: Rscript -e 'rmarkdown::render("index.Rmd")'
       
-    - name: Upload results
-      uses: actions/upload-artifact@master
-      with:
-        name: docs
-        path: index.html
+#    - name: Upload results
+ #     uses: actions/upload-artifact@v1
+  #    with:
+   #     name: docs
+    #    path: index.html
               
-    - name: Checkout
-      uses: actions/checkout@master
-    - name: Download artifact
-      uses: actions/download-artifact@master
-      with:
-        name: docs
+#    - name: Checkout
+ #     uses: actions/checkout@master
+  #  - name: Download artifact
+   #   uses: actions/download-artifact@v1.0.0
+    #  with:
+     #   name: docs
 
     - name: Push changes to repo
       run: |
@@ -43,7 +43,7 @@ jobs:
           git push ${REMOTE} master
 
 
- # build:
+    # build:
   #  runs-on: ubuntu-latest
  #   needs: [render, push]
  #   steps:

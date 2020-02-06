@@ -1,20 +1,27 @@
-on: push
-#   schedule:
-  #   # * is a special character in YAML so you have to quote this string
-  #   - cron:  '*/30 * * * *'
+on: 
+  schedule:
+     # * is a special character in YAML so you have to quote this string
+    - cron:  '*/20 * * * *'
   
 name: render
 
 jobs:
-  render:
+   build:
     runs-on: ubuntu-latest
-    container: rocker/verse
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
+    - name: Trigger our build webhook on Netlify
+      run: curl -s -X POST "https://api.netlify.com/build_hooks/${token}"
+      env:
+        TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+ # render:
+  #  runs-on: ubuntu-latest
+   # container: rocker/verse
+    #steps:
+#    - name: Checkout
+ #     uses: actions/checkout@v1
       
-    - name: render rmarkdown  
-      run: Rscript -e 'rmarkdown::render("index.Rmd")'
+  #  - name: render rmarkdown  
+   #   run: Rscript -e 'rmarkdown::render("index.Rmd")'
       
 #    - name: Upload results
  #     uses: actions/upload-artifact@v1
@@ -29,25 +36,17 @@ jobs:
     #  with:
      #   name: docs
 
-    - name: Push changes to repo
-      run: |
-         REMOTE=https://${{ secrets.actions }}@github.com/${{ github.repository }}
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
-          git config user.name "${{ github.actor }}"
+#    - name: Push changes to repo
+ #     run: |
+  #       REMOTE=https://${{ secrets.actions }}@github.com/${{ github.repository }}
+   #       git config user.email "${{ github.actor }}@users.noreply.github.com"
+    #      git config user.name "${{ github.actor }}"
           
-          git pull ${REMOTE}
-          git checkout master
-          git add .
-          git status
-          git commit -am "Add new comment"
-          git push ${REMOTE} master
+     #     git pull ${REMOTE}
+      #    git checkout master
+       #   git add .
+        #  git status
+         # git commit -am "Add new comment"
+        #  git push ${REMOTE} master
 
 
-    # build:
-  #  runs-on: ubuntu-latest
- #   needs: [render, push]
- #   steps:
- #   - name: Trigger our build webhook on Netlify
- #     run: curl -s -X POST "https://api.netlify.com/build_hooks/${token}"
-  #    env:
-   #     TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

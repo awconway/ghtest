@@ -6,7 +6,7 @@ on: push
 name: render
 
 jobs:
-   render:
+  render:
     runs-on: ubuntu-latest
     container: rocker/verse
     steps:
@@ -29,9 +29,10 @@ jobs:
       with:
         name: docs
         
-    build:
-      runs-on: ubuntu-latest
+  build:
+      name: netlify
       needs: render
+      runs-on: ubuntu-latest
       steps:
       - name: Trigger our build webhook on Netlify
         run: curl -s -X POST "https://api.netlify.com/build_hooks/${token}"

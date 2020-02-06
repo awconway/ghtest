@@ -1,7 +1,7 @@
-on: 
-  schedule:
+on: push
+ # schedule:
      # * is a special character in YAML so you have to quote this string
-    - cron:  '*/20 * * * *'
+  #  - cron:  '*/20 * * * *'
   
 name: render
 
@@ -28,6 +28,15 @@ jobs:
       uses: actions/download-artifact@v1.0.0
       with:
         name: docs
+        
+    build:
+      runs-on: ubuntu-latest
+      needs: render
+      steps:
+      - name: Trigger our build webhook on Netlify
+        run: curl -s -X POST "https://api.netlify.com/build_hooks/${token}"
+        env:
+          TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
 #    - name: Push changes to repo
  #     run: |
@@ -41,13 +50,3 @@ jobs:
         #  git status
          # git commit -am "Add new comment"
         #  git push ${REMOTE} master
-
-
-    build:
-      runs-on: ubuntu-latest
-      needs: render
-      steps:
-      - name: Trigger our build webhook on Netlify
-        run: curl -s -X POST "https://api.netlify.com/build_hooks/${token}"
-        env:
-          TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
